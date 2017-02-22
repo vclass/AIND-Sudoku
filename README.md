@@ -18,17 +18,17 @@ A: Naked Twins technique is one of Suduko strategies to eliminate/reduce possibi
     2. Eliminate possibilities: Loop through list of Naked Twins, for each unit Naked Twins belong to, eliminate
     the naked twins as possibilities from their peers.
 
-    Finally, we included Naked Twins constraint into Problem Reduction step (reduce_puzzle function) along
-    with Elimination and Only Choice constraints. This help the agent to solve the problem faster as the technique help
-    eliminate more possibilities, so, reduce the size of Search Space.
+   Finally, we included Naked Twins constraint into Problem Reduction step (reduce_puzzle function) along
+   with Elimination and Only Choice constraints. This help the agent to solve the problem faster as the technique help
+   eliminate more possibilities, so, reduce the size of Search Space.
 
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
 A: For normal Sudoku, there are 3 rules to fill out digits into puzzle:
-   1. Rows need to have all digits from 1 - 9 without duplication
-   2. Columns need to have all digits from 1 - 9 without duplication
-   3. Squares need to have all digits from 1 - 9 without duplication
+    1. Rows need to have all digits from 1 - 9 without duplication
+    2. Columns need to have all digits from 1 - 9 without duplication
+    3. Squares need to have all digits from 1 - 9 without duplication
 
    For Sudoku solving agent, we implement constraints propagation techniques based on these 3 rules. We implement techniques
    that can eliminate possibilities to fill in the digits that will violate the rule. For example, the naked twins strategy
@@ -36,16 +36,16 @@ A: For normal Sudoku, there are 3 rules to fill out digits into puzzle:
    , we will need to leave them blank and will violate a rule.
 
    For diagonal Sudoku, there is additional rule below:
-   4. Diagonal axis (Both topleft-to-bottomright diagonal and bottomleft-to-topright diagonal) need to have all digits
-   from 1 - 9 without duplication
+    4. Diagonal axis (Both topleft-to-bottomright diagonal and bottomleft-to-topright diagonal) need to have all digits
+    from 1 - 9 without duplication
 
    For Diagonal Sudoku solving agent, we need to adjust codes to ensure that all constraint propagation techniques we
    implemented satisfied the new rule as well. The implementation steps are below:-
-        1. Create another unit called "diagonal_units" that consist of 2 units:-
-           1. TopLeft-to-BottomRight diagonal - [A1, B2, C3, D4, E5, F6, G7, H8, I9]
-           2. BottomLeft-to-TopRight diagonal - [A9, B8, C7, D6, E5, F4, G3, H2, I1]
-        2. Include diagonal_units into list of units (unitlist = row_units + column_units + square_units + diagonal_units)
-        With this way, all constraint propagation techniques we wrote before will include diagonal rule into consideration.
+    1. Create another unit called "diagonal_units" that consist of 2 units:-
+        1. TopLeft-to-BottomRight diagonal - [A1, B2, C3, D4, E5, F6, G7, H8, I9]
+        2. BottomLeft-to-TopRight diagonal - [A9, B8, C7, D6, E5, F4, G3, H2, I1]
+    2. Include diagonal_units into list of units (unitlist = row_units + column_units + square_units + diagonal_units)
+    With this way, all constraint propagation techniques we wrote before will include diagonal rule into consideration.
 
    As Diagonal rule create more constraints to the puzzle, constraint propagation will be able to eliminate more possibilities
    in Problem Reduction step. This means Sudoku Solving Agent should be able to solve the problem faster as Search Space
